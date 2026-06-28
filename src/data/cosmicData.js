@@ -347,6 +347,7 @@ export const musicMoods = [
     ],
     frequencies: ['432 Hz — Frecuencia de la armonía', '528 Hz — Frecuencia del amor y sanación'],
     affirmation: 'La paz es mi estado natural. Regreso a ella siempre.',
+    spotifyId: '37i9dQZF1DX3Ogo9pFvBkY',
   },
   {
     id: 'energia',
@@ -363,6 +364,7 @@ export const musicMoods = [
     ],
     frequencies: ['285 Hz — Regeneración de energía', '963 Hz — Frecuencia de iluminación'],
     affirmation: 'Mi energía es poderosa y la dirijo con sabiduría.',
+    spotifyId: '37i9dQZF1DX76Wlfdnj7AP',
   },
   {
     id: 'sanacion',
@@ -379,6 +381,7 @@ export const musicMoods = [
     ],
     frequencies: ['396 Hz — Libera culpa y miedo', '417 Hz — Facilita el cambio'],
     affirmation: 'Me permito sanar completamente y con amor.',
+    spotifyId: '37i9dQZF1DX3YSRoSdA634',
   },
   {
     id: 'creatividad',
@@ -395,6 +398,7 @@ export const musicMoods = [
     ],
     frequencies: ['528 Hz — Transformación y milagros', '741 Hz — Expresión e intuición'],
     affirmation: 'Soy un canal de creatividad infinita y divina.',
+    spotifyId: '37i9dQZF1DX8wK7b2Zs6tO',
   },
   {
     id: 'sueno',
@@ -411,6 +415,7 @@ export const musicMoods = [
     ],
     frequencies: ['396 Hz — Ondas delta para sueño profundo', '174 Hz — Alivio del dolor y sedación'],
     affirmation: 'Merezco descanso profundo. Mi cuerpo sabe cómo sanar mientras duermo.',
+    spotifyId: '37i9dQZF1DWZd79rJ6a7lp',
   },
 ]
 

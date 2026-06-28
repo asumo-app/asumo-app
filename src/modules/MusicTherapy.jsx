@@ -111,13 +111,19 @@ export default function MusicTherapy() {
 
             <div style={{ textAlign: 'center' }}>
               <button className="btn btn-lg" onClick={() => setPlaying(p => !p)}
-                style={{ background: `linear-gradient(135deg, ${selected.color}80, ${selected.color})` }}>
-                {playing ? '⏸ Pausar' : '▶ Reproducir ambiente'}
+                style={{ background: `linear-gradient(135deg, ${selected.color}80, ${selected.color})`, marginBottom: 20 }}>
+                {playing ? '⏸ Ocultar playlist' : '▶ Abrir playlist'}
               </button>
               {playing && (
-                <p style={{ fontSize: '0.73rem', color: 'var(--silver-dim)', marginTop: 10 }}>
-                  Reproduciendo ambiente visual · Busca la canción en tu app de música
-                </p>
+                <iframe
+                  src={`https://open.spotify.com/embed/playlist/${selected.spotifyId}?utm_source=generator&theme=0`}
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  style={{ borderRadius: 12 }}
+                />
               )}
             </div>
           </div>
