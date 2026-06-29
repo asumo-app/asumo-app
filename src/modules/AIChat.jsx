@@ -1,6 +1,35 @@
 import { useState, useRef, useEffect } from 'react'
 import { aiResponses } from '../data/cosmicData'
 
+const GEMINI_KEY = import.meta.env.VITE_GEMINI_KEY
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`
+
+async function askGemini(messages) {
+  const history = messages
+    .filter(m => m.from === 'user' || m.from === 'asumo')
+    .map(m => ({
+      role: m.from === 'user' ? 'user' : 'model',
+      parts: [{ text: m.text }],
+    }))
+
+  const res = await fetch(GEMINI_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      system_instruction: {
+        parts: [{ text: `Eres Asumo, una IA de acompañamiento emocional empática, cálida y sin juicios.
+Respondes en español, con frases cortas y humanas.
+No das diagnósticos médicos ni psicológicos.
+Validas emociones, haces preguntas abiertas y acompañas con ternura.
+Máximo 3 oraciones por respuesta.` }]
+      },
+      contents: history,
+    }),
+  })
+  const data = await res.json()
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || null
+}
+
 // =====================================================
 // 🌸 NÚMERO DE WHATSAPP DE FABITA
 // Pon solo números: código de país + número
@@ -62,29 +91,37 @@ export default function AIChat() {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, typing])
 
-  const send = (text) => {
+  const send = async (text) => {
     const trimmed = (text || input).trim()
     if (!trimmed || typing) return
 
     const userMsg = { id: Date.now(), from: 'user', text: trimmed, time: new Date() }
-    setMessages(m => [...m, userMsg])
+    const updatedMessages = [...messages, userMsg]
+    setMessages(updatedMessages)
     setInput('')
     setTyping(true)
 
-    const response = getResponse(trimmed, lastResponse)
-    const delay = typingDelay(response)
-
-    setTimeout(() => {
+    try {
+      const response = await askGemini(updatedMessages)
       setMessages(m => [...m, {
         id: Date.now() + 1,
         from: 'asumo',
-        text: response,
+        text: response || getResponse(trimmed, lastResponse),
         time: new Date(),
       }])
-      setLastResponse(response)
-      setTyping(false)
-    }, delay)
+      if (response) setLastResponse(response)
+    } catch {
+      const fallback = getResponse(trimmed, lastResponse)
+      setMessages(m => [...m, {
+        id: Date.now() + 1,
+        from: 'asumo',
+        text: fallback,
+        time: new Date(),
+      }])
+      setLastResponse(fallback)
+    }
 
+    setTyping(false)
     inputRef.current?.focus()
   }
 
