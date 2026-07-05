@@ -18,16 +18,10 @@ function getMoonPhase(date) {
 
 const MODULES = [
   { id:'zodiac',     icon:'⭐', name:'Signos Zodiacales',  desc:'Afirmación diaria por signo', color:'#c44569' },
-  { id:'chat',       icon:'💬', name:'Chat de Apoyo',      desc:'IA empática y presente',     color:'#4f9eff' },
   { id:'numerology', icon:'🔢', name:'Numerología',        desc:'Tu número de vida y del día', color:'#c9a227' },
-  { id:'moon',       icon:'🌙', name:'Modo Luna',          desc:'Rituales y energía lunar',   color:'#7f8c8d' },
-  { id:'selflove',   icon:'💜', name:'Amor Propio',        desc:'Rituales y afirmaciones',    color:'#a855f7' },
   { id:'music',      icon:'🎵', name:'Musicoterapia',      desc:'Música para el alma',        color:'#c9a227' },
-  { id:'goals',      icon:'🎯', name:'Metas & Intenciones', desc:'Calendario mensual',        color:'#16a085' },
-  { id:'hobbies',    icon:'🎨', name:'Ritual Creativo',    desc:'Expresión consciente',      color:'#e67e22' },
-  { id:'checkin',    icon:'✨', name:'Mi Bienestar Diario',desc:'Emociones y rutinas',        color:'#00bcd4' },
+  { id:'checkin',    icon:'✨', name:'Bienestar',          desc:'Emociones y registro',        color:'#00bcd4' },
   { id:'letter',     icon:'💌', name:'Carta al Futuro',    desc:'Cápsula del tiempo',         color:'#e91e8c' },
-  { id:'vision',     icon:'🔮', name:'Vision Board',       desc:'Tu vida soñada',             color:'#6b21a8' },
 ]
 
 const DIAS  = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']

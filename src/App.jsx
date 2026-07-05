@@ -1,33 +1,30 @@
 import { useState } from 'react'
 import StarBackground from './components/StarBackground'
-import BottomNav from './components/BottomNav'
 import Onboarding from './components/Onboarding'
 import Home from './components/Home'
 import ZodiacAffirmations from './modules/ZodiacAffirmations'
-import AIChat from './modules/AIChat'
-import SelfLove from './modules/SelfLove'
 import MusicTherapy from './modules/MusicTherapy'
-import GoalsCalendar from './modules/GoalsCalendar'
-import CreativeHobbies from './modules/CreativeHobbies'
-import MoonMode from './modules/MoonMode'
 import EmotionalCheckin from './modules/EmotionalCheckin'
 import FutureLetter from './modules/FutureLetter'
-import VisionBoard from './modules/VisionBoard'
 import Numerology from './modules/Numerology'
 import AboutAsumo from './modules/AboutAsumo'
+
+const NAV_ITEMS = [
+  { id: 'home',      label: 'Inicio' },
+  { id: 'zodiac',    label: 'Signos' },
+  { id: 'music',     label: 'Musicoterapia' },
+  { id: 'checkin',   label: 'Bienestar' },
+  { id: 'letter',    label: 'Carta Futura' },
+  { id: 'numerology',label: 'Numerología' },
+  { id: 'about',     label: 'Sobre Asumo' },
+]
 
 function renderModule(id, nav) {
   switch (id) {
     case 'zodiac':     return <ZodiacAffirmations />
-    case 'chat':       return <AIChat />
-    case 'selflove':   return <SelfLove />
     case 'music':      return <MusicTherapy />
-    case 'goals':      return <GoalsCalendar />
-    case 'hobbies':    return <CreativeHobbies />
-    case 'moon':       return <MoonMode />
     case 'checkin':    return <EmotionalCheckin />
     case 'letter':     return <FutureLetter />
-    case 'vision':     return <VisionBoard />
     case 'numerology': return <Numerology />
     case 'about':      return <AboutAsumo />
     default:           return <Home onNav={nav} />
@@ -45,7 +42,6 @@ export default function App() {
     setProfile(p)
   }
 
-  // First-time user: show onboarding
   if (!profile) {
     return (
       <div className="app">
@@ -58,10 +54,58 @@ export default function App() {
   return (
     <div className="app">
       <StarBackground />
-      <main className="app-main" key={current}>
+
+      {/* Top navigation */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        background: 'rgba(5,5,28,0.92)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(200,216,236,0.1)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flexWrap: 'wrap', gap: '4px 2px',
+        padding: '0 12px',
+        minHeight: 48,
+      }}>
+        {NAV_ITEMS.map(item => {
+          const active = current === item.id
+          return (
+            <button
+              key={item.id}
+              onClick={() => setCurrent(item.id)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '10px 12px',
+                fontFamily: "'Raleway', sans-serif",
+                fontSize: '0.68rem',
+                fontWeight: active ? 700 : 400,
+                letterSpacing: '0.06em',
+                color: active ? 'var(--white)' : 'var(--silver-dim)',
+                textTransform: 'uppercase',
+                position: 'relative',
+                transition: 'color 0.2s',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {item.label}
+              {active && (
+                <span style={{
+                  position: 'absolute', bottom: 6, left: '20%', right: '20%',
+                  height: 1.5,
+                  background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.9), transparent)',
+                  borderRadius: 1,
+                  display: 'block',
+                }} />
+              )}
+            </button>
+          )
+        })}
+      </nav>
+
+      <main className="app-main" key={current} style={{ paddingBottom: 24 }}>
         {renderModule(current, setCurrent)}
       </main>
-      <BottomNav current={current} onNav={setCurrent} />
     </div>
   )
 }
