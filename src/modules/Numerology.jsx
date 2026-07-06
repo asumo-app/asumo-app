@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { NUMEROLOGY, calcLifePath, calcDailyNumber } from '../data/numerologyData'
+import { SACRED_CODE_CATEGORIES, HOW_TO_USE } from '../data/sacredCodesData'
 
 const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
@@ -433,6 +434,150 @@ function LifePathCard({ number, data, day, month, year, affIdx, onReset }) {
           </div>
         </div>
       </div>
+      {/* ── Sacred Codes Section ── */}
+      <SacredCodesSection />
+    </div>
+  )
+}
+
+// ─── Sacred Codes ─────────────────────────────────────────────
+function SacredCodesSection() {
+  const [activeCategory, setActiveCategory] = useState(null)
+  const [copiedCode, setCopiedCode] = useState(null)
+
+  const copyCode = (code) => {
+    navigator.clipboard?.writeText(code)
+    setCopiedCode(code)
+    setTimeout(() => setCopiedCode(null), 2000)
+  }
+
+  return (
+    <div style={{ marginTop: 48 }}>
+      {/* Header */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(201,162,39,0.12), rgba(168,85,247,0.08))',
+        border: '1px solid rgba(201,162,39,0.25)',
+        borderRadius: 20, padding: '32px 36px', marginBottom: 28,
+      }}>
+        <div style={{
+          fontFamily: "'Cinzel',serif", fontSize: '0.68rem',
+          letterSpacing: '0.22em', color: '#c9a227',
+          textTransform: 'uppercase', marginBottom: 10,
+        }}>✦ Códigos Sagrados</div>
+        <h2 style={{
+          fontFamily: "'Cinzel',serif", fontSize: '1.3rem',
+          color: 'var(--white)', marginBottom: 12,
+        }}>Números que transforman tu realidad</h2>
+        <p style={{ color: 'var(--silver-mid)', fontSize: '0.88rem', lineHeight: 1.75, marginBottom: 24 }}>
+          Los códigos sagrados son secuencias numéricas que usas como herramienta de enfoque y meditación.
+          No hay magia complicada: eliges el número, lo repites (mentalmente o por escrito) y visualizas
+          lo que deseas como si ya fuera real. Es una práctica de intención y consciencia.
+        </p>
+
+        {/* Cómo usarlos */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
+          {HOW_TO_USE.map(item => (
+            <div key={item.step} style={{
+              background: 'rgba(0,0,0,0.2)', borderRadius: 12,
+              padding: '14px 16px', border: '1px solid rgba(201,162,39,0.15)',
+            }}>
+              <div style={{
+                width: 28, height: 28, borderRadius: '50%',
+                background: 'linear-gradient(135deg, #c9a227, #a07a10)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '0.75rem', fontWeight: 700, color: 'white',
+                marginBottom: 8,
+              }}>{item.step}</div>
+              <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>{item.title}</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--silver-dim)', lineHeight: 1.5 }}>{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Category selector */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
+        {SACRED_CODE_CATEGORIES.map(cat => {
+          const active = activeCategory?.id === cat.id
+          return (
+            <button key={cat.id} onClick={() => setActiveCategory(active ? null : cat)}
+              style={{
+                padding: '9px 18px',
+                background: active ? `linear-gradient(135deg, ${cat.color}60, ${cat.color}30)` : 'var(--glass)',
+                border: active ? `1px solid ${cat.color}70` : '1px solid var(--border)',
+                borderRadius: 50, cursor: 'pointer',
+                fontFamily: "'Raleway',sans-serif",
+                fontSize: '0.82rem', fontWeight: active ? 700 : 400,
+                color: active ? 'var(--white)' : 'var(--silver-mid)',
+                backdropFilter: 'blur(10px)',
+                transition: 'all 0.2s',
+                boxShadow: active ? `0 0 16px ${cat.color}30` : 'none',
+              }}>
+              {cat.icon} {cat.name}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Codes grid */}
+      {activeCategory ? (
+        <div style={{ animation: 'fadeUp 0.3s ease' }}>
+          <div style={{
+            background: `linear-gradient(135deg, ${activeCategory.color}12, rgba(0,0,0,0.1))`,
+            border: `1px solid ${activeCategory.color}30`,
+            borderRadius: 16, padding: '20px 24px', marginBottom: 20,
+          }}>
+            <p style={{ fontSize: '0.86rem', color: 'var(--silver-mid)', lineHeight: 1.7 }}>
+              {activeCategory.description}
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 14 }}>
+            {activeCategory.codes.map(item => (
+              <div key={item.code} style={{
+                background: 'var(--glass)', backdropFilter: 'blur(14px)',
+                border: `1px solid ${activeCategory.color}25`,
+                borderRadius: 14, padding: '18px 20px',
+                transition: 'all 0.2s',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <span style={{
+                    fontFamily: "'Cinzel',serif", fontSize: '1.5rem',
+                    fontWeight: 700, color: activeCategory.color,
+                    textShadow: `0 0 16px ${activeCategory.color}50`,
+                  }}>{item.code}</span>
+                  <button onClick={() => copyCode(item.code)} style={{
+                    background: copiedCode === item.code ? `${activeCategory.color}30` : 'rgba(255,255,255,0.06)',
+                    border: `1px solid ${activeCategory.color}30`,
+                    borderRadius: 8, padding: '4px 10px', cursor: 'pointer',
+                    fontSize: '0.68rem', color: 'var(--silver-dim)',
+                    fontFamily: "'Raleway',sans-serif",
+                    transition: 'all 0.2s',
+                  }}>
+                    {copiedCode === item.code ? '✓ Copiado' : 'Copiar'}
+                  </button>
+                </div>
+                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--white)', marginBottom: 5 }}>
+                  {item.name}
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--silver-dim)', lineHeight: 1.5 }}>
+                  {item.use}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div style={{
+          padding: '36px', textAlign: 'center',
+          border: '1px dashed rgba(201,162,39,0.2)',
+          borderRadius: 16,
+        }}>
+          <div style={{ fontSize: '2rem', marginBottom: 10, opacity: 0.5 }}>✦</div>
+          <p style={{ color: 'var(--silver-dim)', fontSize: '0.88rem' }}>
+            Elige una categoría para ver sus códigos sagrados
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -234,21 +234,28 @@ export default function ZodiacAffirmations() {
             background: `linear-gradient(90deg, transparent, ${selected.color}, transparent)` }} />
 
           {/* Sign header */}
-          <div style={{ padding: '30px 36px 22px', display: 'flex',
-            alignItems: 'center', gap: 20, borderBottom: '1px solid var(--border)' }}>
-            <span style={{ fontSize: '3.5rem', lineHeight: 1,
-              filter: `drop-shadow(0 0 18px ${selected.color})` }}>{selected.symbol}</span>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontFamily: "'Cinzel',serif", fontSize: '1.4rem',
-                fontWeight: 700, color: 'var(--white)', letterSpacing: '0.08em', marginBottom: 10 }}>
-                {selected.name}
-              </div>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                <span className="badge">{selected.elementIcon} {selected.element}</span>
-                <span className="badge">{selected.dates}</span>
-                <span className="badge">{selected.planetSymbol} {selected.planet}</span>
+          <div style={{ padding: '30px 36px 22px', borderBottom: '1px solid var(--border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 16 }}>
+              <span style={{ fontSize: '3.5rem', lineHeight: 1,
+                filter: `drop-shadow(0 0 18px ${selected.color})` }}>{selected.symbol}</span>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: "'Cinzel',serif", fontSize: '1.4rem',
+                  fontWeight: 700, color: 'var(--white)', letterSpacing: '0.08em', marginBottom: 10 }}>
+                  {selected.name}
+                </div>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <span className="badge">{selected.elementIcon} {selected.element}</span>
+                  <span className="badge">{selected.dates}</span>
+                  <span className="badge">{selected.planetSymbol} {selected.planet}</span>
+                </div>
               </div>
             </div>
+            {selected.description && (
+              <p style={{ fontSize: '0.88rem', color: 'var(--silver-mid)', lineHeight: 1.75,
+                borderTop: `1px solid ${selected.color}20`, paddingTop: 16 }}>
+                {selected.description}
+              </p>
+            )}
           </div>
 
           {/* Tabs */}
