@@ -2,6 +2,7 @@
 //  SOBRE ASUMO — Página personal de Fabita
 //  Personaliza los textos con tu información real
 // ════════════════════════════════════════
+import ModuleHeader from '../components/ModuleHeader'
 
 const INSTAGRAM_URL = 'https://www.instagram.com/tu_usuario/'  // ← cambia tu usuario
 const INSTAGRAM_HANDLE = '@tu_usuario'                          // ← cambia tu usuario
@@ -10,26 +11,11 @@ export default function AboutAsumo() {
   return (
     <div className="mod" style={{ maxWidth: 740 }}>
 
-      {/* ── Hero ── */}
-      <div style={{ textAlign: 'center', marginBottom: 48 }}>
-        <div style={{
-          fontSize: '3.5rem', marginBottom: 14,
-          filter: 'drop-shadow(0 0 22px rgba(201,162,39,0.6))',
-          animation: 'float 3.5s ease-in-out infinite',
-        }}>✦</div>
-        <h1 style={{
-          fontFamily: "'Cinzel',serif",
-          fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', fontWeight: 700,
-          letterSpacing: '0.12em',
-          background: 'linear-gradient(135deg, #e0ecff, #c8d8ec, #c9a227)',
-          backgroundSize: '200% auto',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          animation: 'shimmer 4s linear infinite',
-          marginBottom: 10,
-        }}>ASUMO</h1>
-        <p style={{ color: 'var(--silver-mid)', letterSpacing: '0.22em',
-          fontSize: '0.8rem' }}>BIENESTAR EMOCIONAL CÓSMICO</p>
-      </div>
+      <ModuleHeader
+        icon={<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e6050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2C12 2 8 6 8 12a4 4 0 0 0 8 0c0-6-4-10-4-10z"/><path d="M12 12v6"/><path d="M9 18h6"/></svg>}
+        title="Sobre Asumo"
+        subtitle="Bienestar emocional cósmico"
+      />
 
       {/* ── Foto + Nombre ── */}
       <section style={{ textAlign: 'center', marginBottom: 48 }}>

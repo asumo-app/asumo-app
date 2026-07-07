@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { NUMEROLOGY, calcLifePath, calcDailyNumber } from '../data/numerologyData'
 import { SACRED_CODE_CATEGORIES, HOW_TO_USE } from '../data/sacredCodesData'
+import ModuleHeader from '../components/ModuleHeader'
 
 const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
@@ -61,11 +62,11 @@ export default function Numerology() {
 
   return (
     <div className="mod" style={{ maxWidth: 820 }}>
-      <div className="mod-hd">
-        <span className="mod-icon">🔢</span>
-        <h1 className="mod-title">Numerología</h1>
-        <p className="mod-sub">Los números que guían tu camino y vibran en cada día</p>
-      </div>
+      <ModuleHeader
+        icon={<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e6050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="9" cy="7" r="2.2"/><circle cx="15" cy="12" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg>}
+        title="Numerología"
+        subtitle="Los números que guían tu camino y vibran en cada día"
+      />
 
       {/* ── Daily number (always visible) ── */}
       <DailyCard number={dailyNumber} data={dailyData} today={today} affIdx={affIdx} />

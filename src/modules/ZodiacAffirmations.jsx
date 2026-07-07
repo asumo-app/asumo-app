@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { zodiacSigns, signById, CHAKRA_ICONS } from '../data/zodiacData'
 import { ZODIAC_DEEP } from '../data/zodiacDeepData'
 import { ZODIAC_EXTENDED } from '../data/zodiacExtendedData'
+import ModuleHeader from '../components/ModuleHeader'
 
 const DAY_IDX = new Date().getDate() - 1
 
@@ -172,15 +173,11 @@ export default function ZodiacAffirmations() {
 
   return (
     <div className="mod">
-      <div className="mod-hd">
-        <span className="mod-icon">⭐</span>
-        <h1 className="mod-title">Afirmaciones Zodiacales</h1>
-        <p className="mod-sub">
-          {userName
-            ? `Tu mensaje cósmico del día, ${userName}`
-            : 'Selecciona tu signo y recibe tu mensaje cósmico del día'}
-        </p>
-      </div>
+      <ModuleHeader
+        icon={<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e6050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="5.5"/><line x1="12" y1="18.5" x2="12" y2="21"/><line x1="3" y1="12" x2="5.5" y2="12"/><line x1="18.5" y1="12" x2="21" y2="12"/><line x1="5.6" y1="5.6" x2="7.4" y2="7.4"/><line x1="16.6" y1="16.6" x2="18.4" y2="18.4"/><line x1="18.4" y1="5.6" x2="16.6" y2="7.4"/><line x1="7.4" y1="16.6" x2="5.6" y2="18.4"/></svg>}
+        title="Afirmaciones Zodiacales"
+        subtitle={userName ? `Tu mensaje cósmico del día, ${userName}` : 'Selecciona tu signo y recibe tu mensaje del día'}
+      />
 
       {/* ── Sign grid ── */}
       <div style={{

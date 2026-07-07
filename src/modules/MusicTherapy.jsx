@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { musicMoods } from '../data/cosmicData'
+import ModuleHeader from '../components/ModuleHeader'
 
 export default function MusicTherapy() {
   const [selected, setSelected] = useState(null)
@@ -15,11 +16,11 @@ export default function MusicTherapy() {
 
   return (
     <div className="mod">
-      <div className="mod-hd">
-        <span className="mod-icon">🎵</span>
-        <h1 className="mod-title">Musicoterapia</h1>
-        <p className="mod-sub">Música y frecuencias para cada estado del alma</p>
-      </div>
+      <ModuleHeader
+        icon={<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e6050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>}
+        title="Musicoterapia"
+        subtitle="Música y frecuencias para cada estado del alma"
+      />
 
       {/* Mood selector */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 14, marginBottom: 32 }}>

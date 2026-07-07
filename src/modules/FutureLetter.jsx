@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import ModuleHeader from '../components/ModuleHeader'
 
 // ─── Tone starters ────────────────────────────────────────────
 const TONES = [
@@ -130,12 +131,11 @@ export default function FutureLetter() {
   return (
     <div className="mod" style={{ maxWidth: 820 }}>
 
-      {/* Header */}
-      <div className="mod-hd">
-        <span className="mod-icon">💌</span>
-        <h1 className="mod-title">Carta a Mi Yo Futura</h1>
-        <p className="mod-sub">Un espacio íntimo para escribirte — palabras que esperarán el momento perfecto</p>
-      </div>
+      <ModuleHeader
+        icon={<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e6050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"/></svg>}
+        title="Carta a Mi Yo Futura"
+        subtitle="Palabras que esperarán el momento perfecto"
+      />
 
       {/* Top navigation */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 34 }}>
