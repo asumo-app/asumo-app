@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import StarBackground from './components/StarBackground'
 import WaterBackground from './components/WaterBackground'
+import LightPageBackground from './components/LightPageBackground'
 import Onboarding from './components/Onboarding'
 import Home from './components/Home'
 import ZodiacAffirmations from './modules/ZodiacAffirmations'
@@ -57,18 +58,16 @@ export default function App() {
 
   const onHome = isHome(current)
 
-  // Nav colors: celadon on home, classic dark on other modules
-  const navBg     = onHome ? 'rgba(9, 28, 26, 0.88)'          : 'rgba(5,5,28,0.92)'
-  const navBorder = onHome ? 'rgba(74,170,144,0.18)'           : 'rgba(200,216,236,0.10)'
-  const navActive = onHome ? '#EAF5F0'                         : 'var(--white)'
-  const navDim    = onHome ? 'rgba(100,180,155,0.65)'          : 'var(--silver-dim)'
-  const navUnderline = onHome
-    ? 'linear-gradient(90deg,transparent,rgba(74,200,160,0.9),transparent)'
-    : 'linear-gradient(90deg,transparent,rgba(168,85,247,0.9),transparent)'
+  // Nav colors: dark celadon on home, light celadon on other modules
+  const navBg     = onHome ? 'rgba(9, 28, 26, 0.88)'           : 'rgba(255,255,255,0.72)'
+  const navBorder = onHome ? 'rgba(74,170,144,0.18)'            : 'rgba(74,170,144,0.30)'
+  const navActive = onHome ? '#EAF5F0'                          : '#0e3d2e'
+  const navDim    = onHome ? 'rgba(100,180,155,0.65)'           : 'rgba(46,96,80,0.60)'
+  const navUnderline = 'linear-gradient(90deg,transparent,rgba(74,200,160,0.9),transparent)'
 
   return (
-    <div className="app">
-      {onHome ? <WaterBackground /> : <StarBackground />}
+    <div className={`app${onHome ? '' : ' light-theme'}`}>
+      {onHome ? <WaterBackground /> : <LightPageBackground />}
 
       {/* Top navigation */}
       <nav style={{

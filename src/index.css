@@ -239,6 +239,28 @@ textarea.inp { min-height: 110px; resize: vertical; line-height: 1.65; }
 .fade-in { animation: fadeUp 0.45s ease both; }
 .glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
 
+/* ── Light celadon theme (internal pages) ───────────────────── */
+.app.light-theme {
+  background: transparent;
+}
+.app.light-theme body,
+.light-theme .app-main {
+  color: #0e3d2e;
+}
+/* Cards become frosted white on the light water background */
+.light-theme .card {
+  background: rgba(255,255,255,0.68);
+  border-color: rgba(107,168,142,0.28);
+  color: #0e3d2e;
+}
+.light-theme .card::before {
+  background: linear-gradient(90deg,transparent,rgba(107,168,142,0.45),transparent);
+}
+.light-theme .card-l {
+  background: rgba(255,255,255,0.52);
+  border-color: rgba(107,168,142,0.22);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .g3 { grid-template-columns: 1fr 1fr; }
