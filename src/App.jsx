@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import StarBackground from './components/StarBackground'
+import WaterBackground from './components/WaterBackground'
 import Onboarding from './components/Onboarding'
 import Home from './components/Home'
 import ZodiacAffirmations from './modules/ZodiacAffirmations'
@@ -10,13 +11,13 @@ import Numerology from './modules/Numerology'
 import AboutAsumo from './modules/AboutAsumo'
 
 const NAV_ITEMS = [
-  { id: 'home',      label: 'Inicio' },
-  { id: 'zodiac',    label: 'Signos' },
-  { id: 'music',     label: 'Musicoterapia' },
-  { id: 'checkin',   label: 'Bienestar' },
-  { id: 'letter',    label: 'Carta Futura' },
-  { id: 'numerology',label: 'Numerología' },
-  { id: 'about',     label: 'Sobre Asumo' },
+  { id: 'home',       label: 'Inicio' },
+  { id: 'zodiac',     label: 'Signos' },
+  { id: 'music',      label: 'Musicoterapia' },
+  { id: 'checkin',    label: 'Bienestar' },
+  { id: 'letter',     label: 'Carta Futura' },
+  { id: 'numerology', label: 'Numerología' },
+  { id: 'about',      label: 'Sobre Asumo' },
 ]
 
 function renderModule(id, nav) {
@@ -30,6 +31,9 @@ function renderModule(id, nav) {
     default:           return <Home onNav={nav} />
   }
 }
+
+// Celadon design tokens for nav
+const isHome = (id) => id === 'home'
 
 export default function App() {
   const [current, setCurrent] = useState('home')
@@ -51,20 +55,33 @@ export default function App() {
     )
   }
 
+  const onHome = isHome(current)
+
+  // Nav colors: celadon on home, classic dark on other modules
+  const navBg     = onHome ? 'rgba(9, 28, 26, 0.88)'          : 'rgba(5,5,28,0.92)'
+  const navBorder = onHome ? 'rgba(74,170,144,0.18)'           : 'rgba(200,216,236,0.10)'
+  const navActive = onHome ? '#EAF5F0'                         : 'var(--white)'
+  const navDim    = onHome ? 'rgba(100,180,155,0.65)'          : 'var(--silver-dim)'
+  const navUnderline = onHome
+    ? 'linear-gradient(90deg,transparent,rgba(74,200,160,0.9),transparent)'
+    : 'linear-gradient(90deg,transparent,rgba(168,85,247,0.9),transparent)'
+
   return (
     <div className="app">
-      <StarBackground />
+      {onHome ? <WaterBackground /> : <StarBackground />}
 
       {/* Top navigation */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(5,5,28,0.92)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(200,216,236,0.1)',
+        background: navBg,
+        backdropFilter: 'blur(22px)',
+        WebkitBackdropFilter: 'blur(22px)',
+        borderBottom: `1px solid ${navBorder}`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        flexWrap: 'wrap', gap: '4px 2px',
+        flexWrap: 'wrap', gap: '2px',
         padding: '0 12px',
         minHeight: 48,
+        transition: 'background 0.4s, border-color 0.4s',
       }}>
         {NAV_ITEMS.map(item => {
           const active = current === item.id
@@ -73,15 +90,13 @@ export default function App() {
               key={item.id}
               onClick={() => setCurrent(item.id)}
               style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '10px 12px',
+                background: 'none', border: 'none', cursor: 'pointer',
+                padding: '10px 11px',
                 fontFamily: "'Raleway', sans-serif",
-                fontSize: '0.68rem',
+                fontSize: '0.67rem',
                 fontWeight: active ? 700 : 400,
-                letterSpacing: '0.06em',
-                color: active ? 'var(--white)' : 'var(--silver-dim)',
+                letterSpacing: '0.07em',
+                color: active ? navActive : navDim,
                 textTransform: 'uppercase',
                 position: 'relative',
                 transition: 'color 0.2s',
@@ -91,9 +106,9 @@ export default function App() {
               {item.label}
               {active && (
                 <span style={{
-                  position: 'absolute', bottom: 6, left: '20%', right: '20%',
+                  position: 'absolute', bottom: 5, left: '18%', right: '18%',
                   height: 1.5,
-                  background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.9), transparent)',
+                  background: navUnderline,
                   borderRadius: 1,
                   display: 'block',
                 }} />
