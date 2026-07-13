@@ -76,11 +76,15 @@ export default function App() {
         backdropFilter: 'blur(22px)',
         WebkitBackdropFilter: 'blur(22px)',
         borderBottom: `1px solid ${navBorder}`,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        flexWrap: 'wrap', gap: '2px',
-        padding: '0 12px',
+        display: 'flex', alignItems: 'center',
+        flexWrap: 'nowrap',
+        overflowX: 'auto',
+        gap: '2px',
+        padding: '0 8px',
         minHeight: 48,
         transition: 'background 0.4s, border-color 0.4s',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
       }}>
         {NAV_ITEMS.map(item => {
           const active = current === item.id

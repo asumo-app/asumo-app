@@ -240,18 +240,23 @@ textarea.inp { min-height: 110px; resize: vertical; line-height: 1.65; }
 .glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
 
 /* ── Light celadon theme (internal pages) ───────────────────── */
-.app.light-theme {
-  background: transparent;
+/* Override CSS variables so all modules inherit correct colors */
+.light-theme {
+  --white:      #0e3d2e;
+  --silver-hi:  #0e3d2e;
+  --silver:     #1a5240;
+  --silver-mid: #2e6050;
+  --silver-dim: #4a8070;
+  --glass:      rgba(255,255,255,0.72);
+  --glass-l:    rgba(255,255,255,0.52);
+  --border:     rgba(107,168,142,0.28);
+  --border-hi:  rgba(74,170,144,0.50);
+  --glow-g:     rgba(74,170,144,0.25);
+  --glow-p:     rgba(74,170,144,0.15);
 }
-.app.light-theme body,
-.light-theme .app-main {
-  color: #0e3d2e;
-}
-/* Cards become frosted white on the light water background */
 .light-theme .card {
-  background: rgba(255,255,255,0.68);
+  background: rgba(255,255,255,0.72);
   border-color: rgba(107,168,142,0.28);
-  color: #0e3d2e;
 }
 .light-theme .card::before {
   background: linear-gradient(90deg,transparent,rgba(107,168,142,0.45),transparent);
@@ -261,15 +266,34 @@ textarea.inp { min-height: 110px; resize: vertical; line-height: 1.65; }
   border-color: rgba(107,168,142,0.22);
 }
 
+/* Hide nav scrollbar on mobile */
+nav::-webkit-scrollbar { display: none; }
+
+/* ── Responsive: 4-card energy grid ─────────────────────────── */
+/* desktop: 4 columns / tablet: 2x2 / mobile: 2x2 compact */
+.energy-grid {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+@media (max-width: 780px) {
+  .energy-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .g3 { grid-template-columns: 1fr 1fr; }
   .g4 { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 640px) {
-  :root { --nav-w: 64px; }
-  .app-main { margin-left: 64px; }
   .g2,.g3,.g4 { grid-template-columns: 1fr; }
-  .mod { padding: 24px 16px 48px; }
+  .mod { padding: 20px 14px 48px; }
   .mod-title { font-size: 1.5rem; }
+  .energy-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .modules-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }

@@ -200,7 +200,9 @@ export default function Home({ onNav }) {
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 12,
-        }}>
+          gridAutoRows: '1fr',
+        }}
+        className="energy-grid">
 
           {/* 1 · Fase lunar */}
           <div style={cardBase}>
@@ -276,9 +278,10 @@ export default function Home({ onNav }) {
         <SectionLabel>Módulos de bienestar</SectionLabel>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(168px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(148px, 1fr))',
           gap: 10,
-        }}>
+        }}
+        className="modules-grid">
           {MODULES.map(m => (
             <button key={m.id} onClick={() => onNav(m.id)} style={{
               ...cardBase,
