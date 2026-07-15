@@ -10,10 +10,12 @@ import EmotionalCheckin from './modules/EmotionalCheckin'
 import FutureLetter from './modules/FutureLetter'
 import Numerology from './modules/Numerology'
 import AboutAsumo from './modules/AboutAsumo'
+import MoonMode from './modules/MoonMode'
 
 const NAV_ITEMS = [
   { id: 'home',       label: 'Inicio' },
   { id: 'zodiac',     label: 'Signos' },
+  { id: 'moon',       label: 'Modo Luna' },
   { id: 'music',      label: 'Musicoterapia' },
   { id: 'checkin',    label: 'Bienestar' },
   { id: 'letter',     label: 'Carta Futura' },
@@ -24,6 +26,7 @@ const NAV_ITEMS = [
 function renderModule(id, nav) {
   switch (id) {
     case 'zodiac':     return <ZodiacAffirmations />
+    case 'moon':       return <MoonMode />
     case 'music':      return <MusicTherapy />
     case 'checkin':    return <EmotionalCheckin />
     case 'letter':     return <FutureLetter />
